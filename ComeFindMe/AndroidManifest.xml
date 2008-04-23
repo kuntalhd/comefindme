@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="comefindme.main">
+	<application android:icon="@drawable/icon" android:name="ComeFindMeApplication">
+
+		<receiver android:name=".LocationRequestHandler">
+            <intent-filter>
+                <action android:name="comefindme.LOCATION_REQUEST_ACTION" />
+            </intent-filter>
+        </receiver>
+        <service android:name=".GTalkDataMessageService" />
+		<activity android:icon="@drawable/icon" android:name="ComeFindMe" android:label="@string/app_name"></activity>
+		<activity android:icon="@drawable/icon" android:name="RetrieveLocationActivity" android:label="@string/app_name"></activity>
+		<activity android:icon="@drawable/icon" android:name="RetrieveGMapLocationActivity" android:label="@string/app_name"></activity>
+		<activity android:icon="@drawable/icon" android:name="RetrieveLatAndLonLocationActivity" android:label="@string/app_name"></activity>
+		<activity android:icon="@drawable/icon" android:name="ComeFindMeMapResponseActivity" android:label="@string/app_name"></activity>
+	</application>
+</manifest>
