@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ComeFindMe</string>
+    
+     <array name="locationRequestItems">
+        <item>Provide Default Location</item>
+        <item>Provide Lat &amp; Lon Location</item>
+        <item>Provide an GMap Location</item>
+        <item>Provide GPS Location</item>  
+    </array>
+</resources>
