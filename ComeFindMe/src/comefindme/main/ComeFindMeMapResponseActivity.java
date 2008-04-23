@@ -2,6 +2,8 @@ package comefindme.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 
@@ -15,7 +17,7 @@ import com.google.googlenav.map.MapPoint;
 public class ComeFindMeMapResponseActivity extends MapActivity {
 
 	private DrivingDirection myDD = null;
-	private boolean foundDirections = false;
+
 	private int otherLat;
 	private int otherLon;
 	private MapView mapView;
@@ -35,7 +37,7 @@ public class ComeFindMeMapResponseActivity extends MapActivity {
 		OverlayController myOC = mapView.createOverlayController();
 		/* Add a new instance of our fancy Overlay-Class to the MapView. */
 
-		myOC.add(new MyMapDrivingDirectionsOverlay(this), true);
+		myOC.add(new DirectionsOverlay(this), true);
 
 	}
 
@@ -60,6 +62,7 @@ public class ComeFindMeMapResponseActivity extends MapActivity {
 
 		} else if (item.getId() == 2) {
 			startActivity(new Intent(this, ComeFindMe.class));
+			finish();
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -68,6 +71,15 @@ public class ComeFindMeMapResponseActivity extends MapActivity {
 	public DrivingDirection getDrivingDirections() {
 		return this.myDD;
 	}
+
+	Handler mapViewUpdateHandler = new Handler() {
+		/** Gets called on every message that is received */
+		// @Override
+		public void handleMessage(Message msg) {
+			mapView.invalidate();
+			super.handleMessage(msg);
+		}
+	};
 
 	private void startFetchDirections(MapPoint from_pos, String from_name, MapPoint to_pos, String to_name) {
 		/*
@@ -96,14 +108,10 @@ public class ComeFindMeMapResponseActivity extends MapActivity {
 					 */
 					Log.e("DEBUGTAG", "'!MyDrivingDirectionsActivity.this.myDD.isComplete()' was interruoted.");
 					if (ComeFindMeMapResponseActivity.this.myDD.getState() != DrivingDirection.SUCCESS_STATUS) {
-						/*
-						 * Set a flag to let the program know the directions are
-						 * done...
-						 */
-						ComeFindMeMapResponseActivity.this.foundDirections = true;
-
+						Message message = new Message();
+						mapViewUpdateHandler.sendMessage(message);
 					} else { /* no route.. */
-						ComeFindMeMapResponseActivity.this.foundDirections = true;
+
 						ComeFindMeMapResponseActivity.this.myDD = null;
 						/* Let the user know that no route was found... */
 					}
