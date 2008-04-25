@@ -68,10 +68,7 @@ public class RetrieveLocationActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, String data, Bundle extras) {
 		super.onActivityResult(requestCode, resultCode, data, extras);
-		// if (requestCode == GMAP_LOCATION_ACTIVITY && resultCode == RESULT_OK)
-		// {
 		sendCoordinates(extras.getString(ComeFindMeConstants.LATITUDE_PROPERTY), extras.getString(ComeFindMeConstants.LONGITUDE_PROPERTY));
-		// }
 	}
 
 	private void sendCoordinates(final String lat, final String lon) {
