@@ -1,0 +1,7 @@
+Come Find Me allows a user on an Android device to request the location of another Android device using the GTalk service and the location based services on the Android phone e.g. GPS, Cellular Triangulation, Google Map reference or Latitude & Longitude coordinates.
+
+The requesting Android device will enter a GTalk username which will then go and find the Android device associated with that GTalk username and request its location. If the responding Android device accepts, the location will be retrieved using one of the location based services on the Android device listed above, and then sent back to the requesting Android device. Once the requesting Android device receives the location a Google Map will be displayed with the Location found. Once the Google map is displayed the user will have the option to get directions from their location to the requested location.
+
+I have also added support for an accelerometer which is used for navigating through Google Maps buy tilting the Android device. Because I only have a emulator to work with I have been using my MacBook Pro's sudden motion sensor instead and serving up X,Y,Z values over a socket connection to the emulator.
+
+Please note that this is in development and I take no responsibility for the use of this code. It is currently only a concept at this stage.
